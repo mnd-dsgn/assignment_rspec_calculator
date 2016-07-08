@@ -55,7 +55,7 @@ describe Calculator do
     end
   end
 
-  describe "#multiply" do 
+  describe "#multiply" do
     let(:calc){Calculator.new}
 
     it "takes two numbers and returns the product" do
@@ -82,7 +82,7 @@ describe Calculator do
       expect{calc.divide}.to raise_error(ArgumentError)
     end
 
-    it "returns an integer if possible" do 
+    it "returns an integer if possible" do
       expect(calc.divide(4,2)).to be_a(Integer)
     end
 
@@ -104,12 +104,12 @@ describe Calculator do
       expect{calc.pow}.to raise_error(ArgumentError)
     end
 
-    it "raising to 0 returns 1" do 
+    it "raising to 0 returns 1" do
       expect(calc.pow(8,0)).to eq(1)
     end
   end
 
-  describe "#sqrt" do 
+  describe "#sqrt" do
     let(:calc){Calculator.new}
 
     it "returns the square root" do
@@ -131,14 +131,36 @@ describe Calculator do
       expect{calc.sqrt}.to raise_error(ArgumentError)
     end
 
-    it "returns an error when taking the square root of a negative number" do 
+    it "returns an error when taking the square root of a negative number" do
       expect{calc.sqrt(-9)}.to raise_error
     end
   end
 
-  describe "#memory" do 
+  describe "#memory" do
+    let(:calc){Calculator.new}
 
-    # check setter method 
+    it "can be set using memory=()" do
+      calc.memory = 4
+      expect(calc.memory).to eq(4)
+    end
+
+    it "can be set using memory=()" do
+      calc.memory = 4
+      calc.memory
+      expect(calc.memory).to be_nil
+    end
+  end
+
+  describe "when @stringify=true" do
+    let(:calc){Calculator.new(true)}
+
+    it "outputs string instead of integer/float" do
+      expect(calc.add(3,4)).to be_a(String)
+    end
+
+    it "outputs correct string answer" do
+      expect(calc.add(3,4)).to eq("7")
+    end
 
   end
 
