@@ -25,8 +25,6 @@ describe Calculator do
     it "returns an argument error when passed two arguments" do
       expect{Calculator.new(true, 7)}.to raise_error(ArgumentError)
     end
-
-
   end
 
   describe "#add" do
@@ -41,7 +39,6 @@ describe Calculator do
       expect{calc.add(3)}.to raise_error(ArgumentError)
       expect{calc.add}.to raise_error(ArgumentError)
     end
-
   end
 
   describe "#subtract" do
@@ -56,10 +53,93 @@ describe Calculator do
       expect{calc.subtract(3)}.to raise_error(ArgumentError)
       expect{calc.subtract}.to raise_error(ArgumentError)
     end
-
   end
 
+  describe "#multiply" do 
+    let(:calc){Calculator.new}
 
+    it "takes two numbers and returns the product" do
+      expect(calc.multiply(3,4)).to eq(12)
+    end
 
+    it "requires exactly 2 arugments else returns argument error" do
+      expect{calc.multiply(3,4,5)}.to raise_error(ArgumentError)
+      expect{calc.multiply(3)}.to raise_error(ArgumentError)
+      expect{calc.multiply}.to raise_error(ArgumentError)
+    end
+  end
+
+  describe "#divide" do
+    let(:calc){Calculator.new}
+
+    it "takes two numbers and returns the quotient" do
+      expect(calc.divide(3,4)).to eq(0.75)
+    end
+
+    it "requires exactly 2 arugments else returns argument error" do
+      expect{calc.divide(3,4,5)}.to raise_error(ArgumentError)
+      expect{calc.divide(3)}.to raise_error(ArgumentError)
+      expect{calc.divide}.to raise_error(ArgumentError)
+    end
+
+    it "returns an integer if possible" do 
+      expect(calc.divide(4,2)).to be_a(Integer)
+    end
+
+    it "cannot divide by zero" do
+      expect{calc.divide(4,0)}.to raise_error
+    end
+  end
+
+  describe "#pow" do
+    let(:calc){Calculator.new}
+
+    it "takes two numbers and returns the power" do
+      expect(calc.pow(3,2)).to eq(9)
+    end
+
+    it "requires exactly 2 arugments else returns argument error" do
+      expect{calc.pow(3,4,5)}.to raise_error(ArgumentError)
+      expect{calc.pow(3)}.to raise_error(ArgumentError)
+      expect{calc.pow}.to raise_error(ArgumentError)
+    end
+
+    it "raising to 0 returns 1" do 
+      expect(calc.pow(8,0)).to eq(1)
+    end
+  end
+
+  describe "#sqrt" do 
+    let(:calc){Calculator.new}
+
+    it "returns the square root" do
+      expect(calc.sqrt(9)).to eq(3)
+      expect(calc.sqrt(100)).to eq(10)
+    end
+
+    it "returns a float rounded to two decimal places if not an integer" do
+      expect(calc.sqrt(8)).to eq(2.83)
+    end
+
+    it "returns an integer if possible" do
+      expect(calc.sqrt(9)).to be_a(Integer)
+    end
+
+    it "requires exactly 1 arugment else returns argument error" do
+      expect{calc.sqrt(3,4,5)}.to raise_error(ArgumentError)
+      expect{calc.sqrt(3,4)}.to raise_error(ArgumentError)
+      expect{calc.sqrt}.to raise_error(ArgumentError)
+    end
+
+    it "returns an error when taking the square root of a negative number" do 
+      expect{calc.sqrt(-9)}.to raise_error
+    end
+  end
+
+  describe "#memory" do 
+
+    # check setter method 
+
+  end
 
 end
